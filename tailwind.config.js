@@ -4,10 +4,6 @@ export default {
   theme: {
     extend: {
       keyframes: {
-        blink: {
-          "0%": { opacity: "1" },
-          "100%": { opacity: "0" },
-        },
         bouncing: {
           "0%": { transform: "translateY(0)" },
           "50%": { transform: "translateY(-5px)" },
@@ -23,13 +19,8 @@ export default {
             transform: "translateY(0)",
           },
         },
-        slideright: {
-          from: {},
-          to: {},
-        },
       },
       animation: {
-        blink: "blink .5s linear infinite alternate",
         slideinbouncing:
           "slidein 1s var(--slidein-delay,0) ease forwards, bouncing 2s ease-in-out infinite",
         slidein: "slidein 1s ease var(--slidein-delay, 0) forwards",
