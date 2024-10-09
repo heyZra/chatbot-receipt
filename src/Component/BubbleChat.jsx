@@ -3,7 +3,7 @@ const BubbleChat = (props) => {
   return (
     <>
       <div
-        className={`h-fit px-7 py-2 w-1/4 max-w-xs mb-2 min-w-fit rounded-t-3xl ${
+        className={`h-fit px-7 py-2 max-w-lg w-fit mb-2 rounded-t-3xl ${
           reply
             ? "bg-green-200 ml-auto text-right rounded-bl-3xl"
             : `${

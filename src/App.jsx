@@ -115,44 +115,53 @@ function App() {
 
       <div
         ref={page3}
-        className="h-screen w-full border-2 border-black rounded-t-3xl flex flex-col items-center"
+        className="h-screen w-full border-2 border-black rounded-t-3xl flex flex-col justify-center items-center justify-between"
       >
-        <span className="pt-5">
-          <h1
-            className="text-4xl font-bold border-black border rounded-full px-4 py-1"
-            style={{ transform: "rotate(-3deg)", display: "inline-block" }}
-          >
-            Meet Our Team
-          </h1>
-        </span>
-        <div className="flex w-full h-full gap-5 justify-center pt-5  ">
-          <CardAbout
-            name="Anggota 1"
-            role="Passionate about Tech"
-            github="https://github.com"
-            linkedin="https://linkedin.com"
-            quote="Lorem ipsum dolor sit
-          amet, consectetur adipiscing elit. Sed do eiusmod tempor incididunt
-          ut labore et dolore"
-          />
-          <CardAbout
-            name="Anggota 2"
-            role="Passionate about Tech"
-            github="https://github.com"
-            linkedin="https://linkedin.com"
-            quote="Lorem ipsum dolor sit
-          amet, consectetur adipiscing elit. Sed do eiusmod tempor incididunt
-          ut labore et dolore"
-          />
-          <CardAbout
-            name="Anggota 3"
-            role="Passionate about Tech"
-            github="https://github.com"
-            linkedin="https://linkedin.com"
-            quote="Lorem ipsum dolor sit
-          amet, consectetur adipiscing elit. Sed do eiusmod tempor incididunt
-          ut labore et dolore"
-          />
+        <div className="flex items-center pt-12">
+          <span className="text-7xl font-extrabold pl-10">
+            <h1 className="">Meet</h1>
+            <h1 className="">Our</h1>
+            <h1>Team</h1>
+          </span>
+          <div className="flex gap-10 ml-10">
+            <CardAbout
+              name="Anggota 1"
+              role="Passionate about Tech"
+              github="https://github.com"
+              linkedin="https://linkedin.com"
+              quote="Lorem ipsum dolor sit
+            amet, consectetur adipiscing elit. Sed do eiusmod tempor incididunt
+            ut labore et dolore"
+            />
+            <CardAbout
+              name="Anggota 2"
+              role="Passionate about Tech"
+              github="https://github.com"
+              linkedin="https://linkedin.com"
+              quote="Lorem ipsum dolor sit
+            amet, consectetur adipiscing elit. Sed do eiusmod tempor incididunt
+            ut labore et dolore"
+            />
+            <CardAbout
+              name="Anggota 3"
+              role="Passionate about Tech"
+              github="https://github.com"
+              linkedin="https://linkedin.com"
+              quote="Lorem ipsum dolor sit
+            amet, consectetur adipiscing elit. Sed do eiusmod tempor incididunt
+            ut labore et dolore"
+            />
+          </div>
+        </div>
+        <input
+          className="border border-black rounded-full w-1/3 py-3 pl-5 pr-[7rem]"
+          placeholder="Send me your feedback!"
+        />
+        <button className="absolute right-[28.5rem] top-[97.4rem] w-24 bg-slate-700 hover:bg-slate-300 hover:text-black text-white rounded-full py-2">
+          Send
+        </button>
+        <div className="border-t-2 border-black w-full text-white h-1/4">
+          <div className="text-black">footer</div>
         </div>
       </div>
     </>
