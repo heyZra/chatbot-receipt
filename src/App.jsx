@@ -5,55 +5,11 @@ import image3 from "./assets/images/image-3.png";
 import { requestGroqAI } from "./utils/Groq";
 import Markdown from "react-markdown";
 import { ReactTyped } from "react-typed";
-
-const Button = (props) => {
-  const { children, width = "w-32", onclick } = props;
-  return (
-    <button
-      className={`py-3 font-semibold ${width} mx-1 bg-black-500 transition ease-in duration-300 border rounded-full hover:bg-slate-400 hover:text-slate-800`}
-      onClick={onclick}
-    >
-      {children}
-    </button>
-  );
-};
-
-const listText = [
-  {
-    text: "You",
-  },
-  { text: "Receipe" },
-];
-
-const Image = (props) => {
-  const { src, position = "", height = "", width = "w-48", delay } = props;
-  return (
-    <img
-      src={src}
-      className={`${width} absolute ${position} ${height} opacity-0 animate-slideinbouncing ${delay}`}
-      alt="image"
-    />
-  );
-};
-
-const BubbleChat = (props) => {
-  const { children, reply = false, type = "" } = props;
-  return (
-    <>
-      <div
-        className={`h-fit px-7 py-2 w-1/4 max-w-xs mb-2 min-w-fit rounded-t-3xl ${
-          reply
-            ? "bg-green-200 ml-auto text-right rounded-bl-3xl"
-            : `${
-                type ? "border-2 text-white" : "bg-green-200"
-              } text-left rounded-br-3xl`
-        }`}
-      >
-        {children}
-      </div>
-    </>
-  );
-};
+import BubbleChat from "./Component/BubbleChat";
+import Image from "./Component/Image";
+import Button from "./Component/Button";
+import { SocialIcon } from "react-social-icons";
+import CardAbout from "./Component/CardAbout";
 
 function App() {
   const [answare, setAnsware] = useState("");
@@ -112,7 +68,9 @@ function App() {
             <Button width="w-1/4" onclick={() => handleScroll(page2)}>
               Chat Me Now!
             </Button>
-            <Button onclick={() => handleScroll(page3)}>About Us</Button>
+            <Button width="w-fit px-5" onclick={() => handleScroll(page3)}>
+              Meet Our Team
+            </Button>
           </div>
         </div>
       </div>
@@ -157,8 +115,46 @@ function App() {
 
       <div
         ref={page3}
-        className="h-screen w-full bg-slate-300 rounded-t-3xl"
-      ></div>
+        className="h-screen w-full border-2 border-black rounded-t-3xl flex flex-col items-center"
+      >
+        <span className="pt-5">
+          <h1
+            className="text-4xl font-bold border-black border rounded-full px-4 py-1"
+            style={{ transform: "rotate(-3deg)", display: "inline-block" }}
+          >
+            Meet Our Team
+          </h1>
+        </span>
+        <div className="flex w-full h-full gap-5 justify-center pt-5  ">
+          <CardAbout
+            name="Anggota 1"
+            role="Passionate about Tech"
+            github="https://github.com"
+            linkedin="https://linkedin.com"
+            quote="Lorem ipsum dolor sit
+          amet, consectetur adipiscing elit. Sed do eiusmod tempor incididunt
+          ut labore et dolore"
+          />
+          <CardAbout
+            name="Anggota 2"
+            role="Passionate about Tech"
+            github="https://github.com"
+            linkedin="https://linkedin.com"
+            quote="Lorem ipsum dolor sit
+          amet, consectetur adipiscing elit. Sed do eiusmod tempor incididunt
+          ut labore et dolore"
+          />
+          <CardAbout
+            name="Anggota 3"
+            role="Passionate about Tech"
+            github="https://github.com"
+            linkedin="https://linkedin.com"
+            quote="Lorem ipsum dolor sit
+          amet, consectetur adipiscing elit. Sed do eiusmod tempor incididunt
+          ut labore et dolore"
+          />
+        </div>
+      </div>
     </>
   );
 }
