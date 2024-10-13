@@ -118,10 +118,10 @@ function App() {
                   </BubbleChat>
                 ) : null}
               </div>
-              <form className="text-center pt-4 " onSubmit={handleButton}>
+              <form className="text-center pt-4" onSubmit={handleButton}>
                 <textarea
                   ref={textareaRef}
-                  className="w-4/5 h-8 overflow-auto rounded-xl px-5 py-1"
+                  className="w-4/5 h-8 overflow-auto rounded-xl px-5"
                   placeholder="Type here ..."
                   id="inputChat"
                   value={textChat}
@@ -129,7 +129,7 @@ function App() {
                   type="text"
                 />
                 <button
-                  className="ml-2  px-5 py-1 font-bold rounded-full bg-blue-400 hover:bg-blue-500"
+                  className="ml-2 px-5 py-1 font-bold rounded-full bg-blue-400 hover:bg-blue-500"
                   type="submit"
                 >
                   Enter

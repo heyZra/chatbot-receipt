@@ -1,6 +1,6 @@
 import { SocialIcon } from "react-social-icons";
 
-const list = ["facebook", "x", "linkedin", "discord", "email"];
+const list = ["facebook", "x", "linkedin", "discordgit add", "email"];
 const Footer = () => {
   return (
     <div className="border-t-4 border-black w-full rounded-t-full flex flex-col items-center pt-3 text-white bg-black h-1/4">
