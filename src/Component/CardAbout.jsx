@@ -3,7 +3,7 @@ import { SocialIcon } from "react-social-icons";
 const CardAbout = (props) => {
   const { name, role, github, linkedin, quote } = props;
   return (
-    <div className="border shadow-xl border-slate-300 rounded-xl h-fit w-1/4 p-3">
+    <div className="border shadow-xl border-slate-300 rounded-xl h-fit w-1/4 p-3 hover:scale-105">
       <div className="flex gap-5 items-center">
         <div className="bg-black rounded-full text-white w-fit px-5 py-3">
           X

@@ -9,6 +9,8 @@ import BubbleChat from "./Component/BubbleChat";
 import Image from "./Component/Image";
 import Button from "./Component/Button";
 import CardAbout from "./Component/CardAbout";
+import { SocialIcon } from "react-social-icons";
+import Footer from "./Component/Footer";
 
 function App() {
   const [answare, setAnsware] = useState("");
@@ -185,9 +187,7 @@ function App() {
         <button className="absolute right-[28.5rem] top-[102.4rem] w-24 bg-slate-700 hover:bg-slate-300 hover:text-black text-white rounded-full py-2">
           Send
         </button>
-        <div className="border-t-2 border-black w-full text-white h-1/4">
-          <div className="text-black">footer</div>
-        </div>
+        <Footer />
       </div>
     </>
   );
