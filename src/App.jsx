@@ -8,17 +8,39 @@ import { ReactTyped } from "react-typed";
 import BubbleChat from "./Component/BubbleChat";
 import Image from "./Component/Image";
 import Button from "./Component/Button";
-import { SocialIcon } from "react-social-icons";
 import CardAbout from "./Component/CardAbout";
 
 function App() {
   const [answare, setAnsware] = useState("");
+  const [textChat, setTextChat] = useState("");
+  const textareaRef = useRef(null);
   const handleButton = async (e) => {
     e.preventDefault();
-    const prompt =
-      '? Tambahkan per point, tambahkan juga emoji menarik di tiap bahannya tapi jika pertanyaanya tidak berunsur resep makanan/minumman maka jangan dijawab, cukup dengan memberikan response "Maaf, Kami Hanya Bisa Bantu Untuk Resep Makanan, Silahkan Coba Lagi 😄" tidak lebih';
-    const askAI = await requestGroqAI(inputChat.value + prompt);
-    setAnsware(askAI);
+    try {
+      const prompt =
+        '? Tambahkan per point, tambahkan juga emoji menarik di tiap bahannya tapi jika pertanyaanya tidak berunsur resep makanan/minumman maka jangan dijawab, cukup dengan memberikan response "Maaf, Kami Hanya Bisa Bantu Untuk Resep Makanan, Silahkan Coba Lagi 😄" tidak lebih';
+      const askAI = await requestGroqAI(textChat + prompt);
+      setAnsware(askAI);
+      setTextChat("");
+      if (textareaRef.current) {
+        textareaRef.current.style.height = "32px";
+      }
+    } catch (error) {
+      console.error(error);
+    }
+  };
+
+  const handleChangeTextChat = (e) => {
+    setTextChat(e.target.value);
+    console.log(e.target.scrollHeight);
+    if (e.target.scrollHeight > 32) {
+      e.target.style.height = "auto";
+    }
+    if (e.target.scrollHeight > 128) {
+      e.target.style.height = "128px";
+    } else {
+      e.target.style.height = `${e.target.scrollHeight}px`;
+    }
   };
   const handleScroll = (params) => {
     if (params.current) {
@@ -95,10 +117,13 @@ function App() {
                 ) : null}
               </div>
               <form className="text-center pt-4 " onSubmit={handleButton}>
-                <input
-                  className="w-4/5 overflow-auto rounded-xl px-5 py-1"
+                <textarea
+                  ref={textareaRef}
+                  className="w-4/5 h-8 overflow-auto rounded-xl px-5 py-1"
                   placeholder="Type here ..."
                   id="inputChat"
+                  value={textChat}
+                  onChange={handleChangeTextChat}
                   type="text"
                 />
                 <button
@@ -130,8 +155,8 @@ function App() {
               github="https://github.com"
               linkedin="https://linkedin.com"
               quote="Lorem ipsum dolor sit
-            amet, consectetur adipiscing elit. Sed do eiusmod tempor incididunt
-            ut labore et dolore"
+              amet, consectetur adipiscing elit. Sed do eiusmod tempor incididunt
+              ut labore et dolore"
             />
             <CardAbout
               name="Anggota 2"
@@ -139,8 +164,8 @@ function App() {
               github="https://github.com"
               linkedin="https://linkedin.com"
               quote="Lorem ipsum dolor sit
-            amet, consectetur adipiscing elit. Sed do eiusmod tempor incididunt
-            ut labore et dolore"
+              amet, consectetur adipiscing elit. Sed do eiusmod tempor incididunt
+              ut labore et dolore"
             />
             <CardAbout
               name="Anggota 3"
@@ -148,8 +173,8 @@ function App() {
               github="https://github.com"
               linkedin="https://linkedin.com"
               quote="Lorem ipsum dolor sit
-            amet, consectetur adipiscing elit. Sed do eiusmod tempor incididunt
-            ut labore et dolore"
+              amet, consectetur adipiscing elit. Sed do eiusmod tempor incididunt
+              ut labore et dolore"
             />
           </div>
         </div>
@@ -157,7 +182,7 @@ function App() {
           className="border border-black rounded-full w-1/3 py-3 pl-5 pr-[7rem]"
           placeholder="Send me your feedback!"
         />
-        <button className="absolute right-[28.5rem] top-[97.4rem] w-24 bg-slate-700 hover:bg-slate-300 hover:text-black text-white rounded-full py-2">
+        <button className="absolute right-[28.5rem] top-[102.4rem] w-24 bg-slate-700 hover:bg-slate-300 hover:text-black text-white rounded-full py-2">
           Send
         </button>
         <div className="border-t-2 border-black w-full text-white h-1/4">
