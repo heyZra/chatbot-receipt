@@ -1,5 +1,11 @@
 const Image = (props) => {
-  const { src, position = "", height = "", width = "w-48", delay } = props;
+  const {
+    src,
+    position = "",
+    height = "",
+    width = "w-48 max-[760px]:w-[9rem]",
+    delay,
+  } = props;
   return (
     <img
       src={src}

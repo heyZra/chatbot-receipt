@@ -9,7 +9,6 @@ import BubbleChat from "./Component/BubbleChat";
 import Image from "./Component/Image";
 import Button from "./Component/Button";
 import CardAbout from "./Component/CardAbout";
-import { SocialIcon } from "react-social-icons";
 import Footer from "./Component/Footer";
 
 function App() {
@@ -57,25 +56,27 @@ function App() {
   return (
     <>
       <div className="w-full h-screen bg-gradient-to-r from-black from-40% to-slate-900 text-white justify-center items-center flex flex-col rounded-b-3xl">
-        <div className="flex flex-col items-center w-3/4">
-          <Image
-            src={image1}
-            position="right-[10rem] top-[3rem]"
-            delay="[--slidein-delay:1200ms]"
-          />
-          <Image
-            src={image2}
-            position="top-[15rem] left-[15rem]"
-            delay="[--slidein-delay:1000ms]"
-          />
-          <Image
-            src={image3}
-            height="h-52"
-            width="w-52"
-            position="right-[18rem] top-[20rem]"
-            delay="[--slidein-delay:1400ms]"
-          />
-          <h1 className="animate-slidein [--slidein-delay:300ms] opacity-0 font-sans text-8xl">
+        <div className="flex flex-col items-center w-3/4 max-[760px]:flex max-[760px]:">
+          <span className="">
+            <Image
+              src={image1}
+              position="right-[10rem] top-[3rem] max-[760px]:right-[0rem] max-[760px]:top-[5rem]"
+              delay="[--slidein-delay:1200ms]"
+            />
+            <Image
+              src={image2}
+              position="top-[15rem] left-[15rem] max-[760px]:top-[17rem] max-[760px]:left-[10%]"
+              delay="[--slidein-delay:1000ms]"
+            />
+            <Image
+              src={image3}
+              height="h-52 max-[760px]:h-[10rem]"
+              width="w-52 max-[760px]:w-[10rem]"
+              position="right-[18rem] top-[20rem] max-[760px]:right-[1.5rem] max-[760px]:top-[24rem]"
+              delay="[--slidein-delay:1400ms]"
+            />
+          </span>
+          <h1 className="animate-slidein max-[760px]:text-6xl [--slidein-delay:300ms] opacity-0 font-sans text-8xl">
             AI is here for{" "}
             <ReactTyped
               strings={["You", "Receipt"]}
@@ -84,15 +85,21 @@ function App() {
               loop
             />
           </h1>
-          <p className="animate-slidein [--slidein-delay:500ms] opacity-0 text-lg font-semibold text-center text-slate-500 mt-8 mb-6 w-1/2">
+          <p className="animate-slidein [--slidein-delay:500ms] opacity-0 text-lg font-semibold text-center text-slate-500 mt-8 mb-6 w-1/2 max-[760px]:text-sm">
             Creating food recipes, time management, and customizing your needs
             easily with the help of AI
           </p>
           <div className="animate-slidein [--slidein-delay:700ms] opacity-0 w-full text-center">
-            <Button width="w-1/4" onclick={() => handleScroll(page2)}>
+            <Button
+              width="w-1/4 max-[600px]:text-xs"
+              onclick={() => handleScroll(page2)}
+            >
               Chat Me Now!
             </Button>
-            <Button width="w-fit px-5" onclick={() => handleScroll(page3)}>
+            <Button
+              width="w-fit px-5 max-[600px]:text-xss"
+              onclick={() => handleScroll(page3)}
+            >
               Meet Our Team
             </Button>
           </div>
@@ -118,10 +125,13 @@ function App() {
                   </BubbleChat>
                 ) : null}
               </div>
-              <form className="text-center pt-4" onSubmit={handleButton}>
+              <form
+                className="text-center pt-4 flex justify-center"
+                onSubmit={handleButton}
+              >
                 <textarea
                   ref={textareaRef}
-                  className="w-4/5 h-8 overflow-auto rounded-xl px-5"
+                  className="w-3/5 h-8 overflow-auto rounded-xl px-5"
                   placeholder="Type here ..."
                   id="inputChat"
                   value={textChat}
@@ -144,13 +154,13 @@ function App() {
         ref={page3}
         className="h-screen w-full border-2 border-black rounded-t-3xl flex flex-col justify-center items-center justify-between"
       >
-        <div className="flex items-center pt-12">
-          <span className="text-7xl font-extrabold pl-10">
-            <h1 className="">Meet</h1>
-            <h1 className="">Our</h1>
+        <div className="flex items-center pt-12 max-[995px]:flex-col">
+          <span className="text-7xl font-extrabold min-[960px]:pl-10 max-[995px]:text-5xl max-[995px]:flex max-[995px]:gap-5 max-[995px]:pb-3">
+            <h1>Meet</h1>
+            <h1>Our</h1>
             <h1>Team</h1>
           </span>
-          <div className="flex gap-10 ml-10">
+          <div className="flex gap-10 min-[995px]:ml-10 max-[780px]:gap-5 max-[995px]:justify-center">
             <CardAbout
               name="Anggota 1"
               role="Passionate about Tech"
@@ -180,13 +190,15 @@ function App() {
             />
           </div>
         </div>
-        <input
-          className="border border-black rounded-full w-1/3 py-3 pl-5 pr-[7rem]"
-          placeholder="Send me your feedback!"
-        />
-        <button className="absolute right-[28.5rem] top-[102.4rem] w-24 bg-slate-700 hover:bg-slate-300 hover:text-black text-white rounded-full py-2">
-          Send
-        </button>
+        <span className="relative h-fit w-full text-center items-center flex justify-center">
+          <input
+            className="border border-black rounded-full w-1/3 py-3 pl-5 pr-[7rem]"
+            placeholder="Send me your feedback!"
+          />
+          <button className="absolute right-1/3 mr-3 w-24 bg-slate-700 hover:bg-slate-300 hover:text-black text-white rounded-full py-2">
+            Send
+          </button>
+        </span>
         <Footer />
       </div>
     </>

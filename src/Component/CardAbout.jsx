@@ -9,8 +9,8 @@ const CardAbout = (props) => {
           X
         </div>
         <div className="flex flex-col">
-          <h1 className="font-bold"> {name}</h1>
-          <p>{role}</p>
+          <h1 className="font-bold max-[760px]:text-xs"> {name}</h1>
+          <p className="max-[760px]:text-xs">{role}</p>
           <div className="flex gap-2">
             <SocialIcon
               className="cursor-pointer"
@@ -27,10 +27,10 @@ const CardAbout = (props) => {
           </div>
         </div>
       </div>
-      <blockquote className="py-2 whitespace-normal text-justify">
-        <span className="font-bold text-xl">"</span>
+      <blockquote className="py-2 whitespace-normal text-justify max-[980px]:text-sm max-[760px]:text-xs">
+        <span className="font-bold text-xl max-[760px]:text-lg">"</span>
         {quote}
-        <span className="font-bold text-xl">"</span>.
+        <span className="font-bold text-xl max-[760px]:text-lg">"</span>.
       </blockquote>
     </div>
   );
