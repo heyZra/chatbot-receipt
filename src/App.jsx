@@ -97,7 +97,7 @@ function App() {
               Chat Me Now!
             </Button>
             <Button
-              width="w-fit px-5 max-[600px]:text-xss"
+              width="w-fit px-5 max-[600px]:text-xs"
               onclick={() => handleScroll(page3)}
             >
               Meet Our Team
@@ -192,10 +192,10 @@ function App() {
         </div>
         <span className="relative h-fit w-full text-center items-center flex justify-center">
           <input
-            className="border border-black rounded-full w-1/3 py-3 pl-5 pr-[7rem]"
+            className="border border-black rounded-full w-1/3 py-3 pl-5 pr-[7rem] max-[800px]:w-1/2"
             placeholder="Send me your feedback!"
           />
-          <button className="absolute right-1/3 mr-3 w-24 bg-slate-700 hover:bg-slate-300 hover:text-black text-white rounded-full py-2">
+          <button className="absolute min-[800px]:right-1/3 mr-3 w-24 bg-slate-700 hover:bg-slate-300 hover:text-black text-white rounded-full py-2 max-[800px]:right-1/4">
             Send
           </button>
         </span>
