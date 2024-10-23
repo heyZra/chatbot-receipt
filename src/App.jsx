@@ -18,9 +18,11 @@ function App() {
   const handleButton = async (e) => {
     e.preventDefault();
     try {
-      const prompt =
-        '? Tambahkan per point, tambahkan juga emoji menarik di tiap bahannya tapi jika pertanyaanya tidak berunsur resep makanan/minumman maka jangan dijawab, cukup dengan memberikan response "Maaf, Kami Hanya Bisa Bantu Untuk Resep Makanan, Silahkan Coba Lagi 😄" tidak lebih';
-      const askAI = await requestGroqAI(textChat + prompt);
+      const prompt = `Ini perintahnya:
+        1. ${textChat}? ini adalah pertanyaanya. 
+        2. Jika pertanyaanya tidak berunsur resep makanan/minumman maka cukup dengan memberikan response "Maaf, Kami Hanya Bisa Bantu Untuk Resep Makanan, Silahkan Coba Lagi 😄" tidak lebih.
+        3. Tapi jika pertanyaanya berunsur resep makanan/minuman maka jawab dengan per point dan tambahkan juga emoji menarik di tiap bahannya.`;
+      const askAI = await requestGroqAI(prompt);
       setAnsware(askAI);
       setTextChat("");
       if (textareaRef.current) {
@@ -139,7 +141,7 @@ function App() {
                   type="text"
                 />
                 <button
-                  className="ml-2 px-5 py-1 font-bold rounded-full bg-blue-400 hover:bg-blue-500"
+                  className="ml-2 px-5 py-1 font-bold h-fit mt-auto rounded-full bg-blue-400 hover:bg-blue-500"
                   type="submit"
                 >
                   Enter
