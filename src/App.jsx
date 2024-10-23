@@ -18,10 +18,10 @@ function App() {
   const handleButton = async (e) => {
     e.preventDefault();
     try {
-      const prompt = `Ini perintahnya:
-        1. ${textChat}? ini adalah pertanyaanya. 
+      const prompt = `Lakukan perintah sesuai di bawah ini:
+        1. "${textChat}?" Ini adalah pertanyaanya. 
         2. Jika pertanyaanya tidak berunsur resep makanan/minumman maka cukup dengan memberikan response "Maaf, Kami Hanya Bisa Bantu Untuk Resep Makanan, Silahkan Coba Lagi 😄" tidak lebih.
-        3. Tapi jika pertanyaanya berunsur resep makanan/minuman maka jawab dengan per point dan tambahkan juga emoji menarik di tiap bahannya.`;
+        3. Tapi jika pertanyaanya berunsur resep makanan/minuman maka jawab dengan per point, tambahkan juga emoji menarik di tiap bahannya dan berikan juga nutrisi dan gizi yang lengkap sehingga menjadi makanan/minuman yang sehat `;
       const askAI = await requestGroqAI(prompt);
       setAnsware(askAI);
       setTextChat("");
@@ -164,31 +164,25 @@ function App() {
           </span>
           <div className="flex gap-10 min-[995px]:ml-10 max-[780px]:gap-5 max-[995px]:justify-center">
             <CardAbout
-              name="Anggota 1"
+              name="Mohammad Ezra Nur I"
               role="Passionate about Tech"
               github="https://github.com"
               linkedin="https://linkedin.com"
-              quote="Lorem ipsum dolor sit
-              amet, consectetur adipiscing elit. Sed do eiusmod tempor incididunt
-              ut labore et dolore"
+              quote="The only way to learn a new programming language is by writing programs in it"
             />
             <CardAbout
-              name="Anggota 2"
+              name="Raden Ibnu H. W"
               role="Passionate about Tech"
               github="https://github.com"
               linkedin="https://linkedin.com"
-              quote="Lorem ipsum dolor sit
-              amet, consectetur adipiscing elit. Sed do eiusmod tempor incididunt
-              ut labore et dolore"
+              quote="Programs must be written for people to read, and only incidentally for machines to execute"
             />
             <CardAbout
-              name="Anggota 3"
+              name="Saftana Fitri"
               role="Passionate about Tech"
               github="https://github.com"
               linkedin="https://linkedin.com"
-              quote="Lorem ipsum dolor sit
-              amet, consectetur adipiscing elit. Sed do eiusmod tempor incididunt
-              ut labore et dolore"
+              quote="Any fool can write code that a computer can understand. Good programmers write code that humans can understand"
             />
           </div>
         </div>
