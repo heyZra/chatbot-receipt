@@ -1,4 +1,4 @@
-import { useRef, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import image1 from "./assets/images/image-1.png";
 import image2 from "./assets/images/image-2.png";
 import image3 from "./assets/images/image-3.png";
@@ -11,12 +11,38 @@ import Button from "./Component/Button";
 import CardAbout from "./Component/CardAbout";
 import Footer from "./Component/Footer";
 import moment from "moment";
+import detectIP from "./utils/detectIP";
+import axios from "axios";
 
 function App() {
   const [answare, setAnsware] = useState("");
   const [textChat, setTextChat] = useState("");
   const textareaRef = useRef(null);
   const [askChat, setAskChat] = useState("");
+  const [country, setCountry] = useState("");
+
+  useEffect(() => {
+    (async () => {
+      try {
+        // Make a GET request to the ipify API to get the user's IP address
+        const response = await axios.get("https://api.ipify.org?format=json");
+        try {
+          // Make a GET request to get the user's Location Country
+          const getLocation = await axios.get(
+            `http://ip-api.com/json/${response.data.ip}`
+          );
+          const countryAddress = getLocation.data.country;
+          console.log(countryAddress);
+          setCountry(countryAddress);
+        } catch (error) {
+          console.error("Failed to fetch IP Location:", error); // Log any errors
+        }
+      } catch (error) {
+        console.error("Failed to fetch IP address:", error); // Log any errors
+      }
+    })(); // Immediately invoked function
+  }, []);
+
   const handleButton = async (e) => {
     e.preventDefault();
     try {
@@ -24,8 +50,82 @@ function App() {
       const time_minutes = moment().format("mm");
       const time_now = `${time_hours}:${time_minutes}`;
       let checkBerbukaOrSahur;
-      const berbukaKeywords = ["berbuka", "buka"];
-      const sahurKeywords = ["sahur", "imsak", "imsyak"];
+      const berbukaKeywords = [
+        "berbuka",
+        "buka",
+        "iftar",
+        "break",
+        "breaking",
+        "إفطار",
+        "فطور", // Arabic
+        "iftar",
+        "açma", // Turkish
+        "افطار",
+        "کھانے کا وقت", // Urdu
+        "iftar",
+        "repas de rupture du jeûne", // French
+        "iftar",
+        "romper el ayuno", // Spanish
+        "ифтар",
+        "разрыв поста", // Russian
+        "iftar",
+        "Fastenbrechen", // German
+        "இஃப்தார்",
+        "மாலை உணவு", // Tamil
+        "ইফতার",
+        "বিরতি", // Bengali
+        "อิฟตาร์",
+        "เลิกถือศีล", // Thai
+        "iftar",
+        "pagbabasag ng pag-aayuno", // Filipino
+        "iftar",
+        "kuvunja saumu", // Swahili
+        "イフタール",
+        "断食を破る", // Japanese
+        "이프타르",
+        "단식을 깨다", // Korean
+        "iftar",
+        "bữa ăn ngắt", // Vietnamese
+      ];
+
+      const sahurKeywords = [
+        "sahur",
+        "imsak",
+        "imsyak",
+        "suhoor",
+        "pre-dawn meal",
+        "سحور",
+        "سحور قبل الفجر", // Arabic
+        "sahur",
+        "sahur yemeği", // Turkish
+        "سحری",
+        "پہلی صبح کا کھانا", // Urdu
+        "suhur",
+        "repas avant l'aube", // French
+        "suhoor",
+        "comida antes del amanecer", // Spanish
+        "сахур",
+        "перед рассветом", // Russian
+        "suhur",
+        "Frühstück vor der Morgendämmerung", // German
+        "சஹூர்",
+        "காலை உணவு", // Tamil
+        "সেহেরি",
+        "সেহরি", // Bengali
+        "ซูโฮร์",
+        "มื้อก่อนรุ่งอรุณ", // Thai
+        "suhoor",
+        "pagkain bago ang umaga", // Filipino
+        "suhoor",
+        "chakula cha asubuhi", // Swahili
+        "スホール",
+        "夜明け前の食事", // Japanese
+        "수후르",
+        "새벽식사", // Korean
+        "suhur",
+        "bữa ăn trước khi mặt trời mọด", // Vietnamese
+      ];
+
       const isBerbukaMentioned = berbukaKeywords.some((keyword) =>
         textChat.toLowerCase().includes(keyword)
       );
@@ -46,7 +146,8 @@ function App() {
         2. ${checkBerbukaOrSahur}
         3. Berikan manajemen estimasi waktunya pengerjaan dari jam ${time_now} sampai selesai.
         4. Jika pertanyaanya tidak berunsur resep makanan/minumman maka cukup dengan memberikan response "Maaf, Kami Hanya Bisa Bantu Untuk Resep Makanan, Silahkan Coba Lagi 😄" tidak lebih.
-        5. Tapi jika pertanyaanya berunsur resep makanan/minuman maka jawab dengan per point, pada langkah-langkah mengolah resepnya atur manajemen waktu, tambahkan juga emoji menarik di tiap bahannya dan berikan juga nutrisi dan gizi yang lengkap sehingga menjadi makanan/minuman yang sehat.`;
+        5. Tapi jika pertanyaanya berunsur resep makanan/minuman maka jawab dengan per point, pada langkah-langkah mengolah resepnya atur manajemen waktu, tambahkan juga emoji menarik di tiap bahannya dan berikan juga nutrisi dan gizi yang lengkap sehingga menjadi makanan/minuman yang sehat.
+        6. Jawab perintah semuanya dengan menggunakan bahasa dari negara ${country}`;
       const askAI = await requestGroqAI(prompt);
       setAskChat(textChat);
       console.log(prompt);
