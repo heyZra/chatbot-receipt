@@ -10,19 +10,46 @@ import Image from "./Component/Image";
 import Button from "./Component/Button";
 import CardAbout from "./Component/CardAbout";
 import Footer from "./Component/Footer";
+import moment from "moment";
 
 function App() {
   const [answare, setAnsware] = useState("");
   const [textChat, setTextChat] = useState("");
   const textareaRef = useRef(null);
+  const [askChat, setAskChat] = useState("");
   const handleButton = async (e) => {
     e.preventDefault();
     try {
+      const time_hours = moment().format("HH");
+      const time_minutes = moment().format("mm");
+      const time_now = `${time_hours}:${time_minutes}`;
+      let checkBerbukaOrSahur;
+      const berbukaKeywords = ["berbuka", "buka"];
+      const sahurKeywords = ["sahur", "imsak", "imsyak"];
+      const isBerbukaMentioned = berbukaKeywords.some((keyword) =>
+        textChat.toLowerCase().includes(keyword)
+      );
+      const isSahurMentioned = sahurKeywords.some((keyword) =>
+        textChat.toLowerCase().includes(keyword)
+      );
+      if (isBerbukaMentioned) {
+        // avarage time adzan magrhib is range 17:30 AM to 19:00 AM, this is for breaking the fast
+        checkBerbukaOrSahur = `Untuk Berbuka Puasa dari jam ${time_now}sebelum jam 16:45`;
+      } else if (isSahurMentioned) {
+        // avarage time imsyak is range 4 AM to 5 AM, this is for sahur
+        checkBerbukaOrSahur = `Untuk Sahur dari jam ${time_now}sebelum jam 16:45`;
+      } else {
+        checkBerbukaOrSahur = ""; // no need to fill in
+      }
       const prompt = `Lakukan perintah sesuai di bawah ini:
-        1. "${textChat}?" Ini adalah pertanyaanya. 
-        2. Jika pertanyaanya tidak berunsur resep makanan/minumman maka cukup dengan memberikan response "Maaf, Kami Hanya Bisa Bantu Untuk Resep Makanan, Silahkan Coba Lagi 😄" tidak lebih.
-        3. Tapi jika pertanyaanya berunsur resep makanan/minuman maka jawab dengan per point, tambahkan juga emoji menarik di tiap bahannya dan berikan juga nutrisi dan gizi yang lengkap sehingga menjadi makanan/minuman yang sehat `;
+        1. "${textChat}?" Ini adalah pertanyaanya.
+        2. ${checkBerbukaOrSahur}
+        3. Berikan manajemen estimasi waktunya pengerjaan dari jam ${time_now} sampai selesai.
+        4. Jika pertanyaanya tidak berunsur resep makanan/minumman maka cukup dengan memberikan response "Maaf, Kami Hanya Bisa Bantu Untuk Resep Makanan, Silahkan Coba Lagi 😄" tidak lebih.
+        5. Tapi jika pertanyaanya berunsur resep makanan/minuman maka jawab dengan per point, pada langkah-langkah mengolah resepnya atur manajemen waktu, tambahkan juga emoji menarik di tiap bahannya dan berikan juga nutrisi dan gizi yang lengkap sehingga menjadi makanan/minuman yang sehat.`;
       const askAI = await requestGroqAI(prompt);
+      setAskChat(textChat);
+      console.log(prompt);
       setAnsware(askAI);
       setTextChat("");
       if (textareaRef.current) {
@@ -35,7 +62,6 @@ function App() {
 
   const handleChangeTextChat = (e) => {
     setTextChat(e.target.value);
-    console.log(e.target.scrollHeight);
     if (e.target.scrollHeight > 32) {
       e.target.style.height = "auto";
     }
@@ -117,10 +143,13 @@ function App() {
             </div>
             <div className="h-full bg-slate-500 rounded-b-3xl px-6 pt-4 pb-2 flex flex-col justify-between overflow-auto">
               <div>
+                <BubbleChat reply={true}>Hai!</BubbleChat>
                 <BubbleChat>
                   Hai, masukkan kata kunci "makanan/minuman"
                 </BubbleChat>
-                <BubbleChat reply={true}>Hai!</BubbleChat>
+                {askChat ? (
+                  <BubbleChat reply={true}>{askChat}</BubbleChat>
+                ) : null}
                 {answare ? (
                   <BubbleChat type="answare">
                     <Markdown>{answare}</Markdown>
