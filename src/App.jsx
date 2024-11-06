@@ -11,8 +11,10 @@ import Button from "./Component/Button";
 import CardAbout from "./Component/CardAbout";
 import Footer from "./Component/Footer";
 import moment from "moment";
-import detectIP from "./utils/detectIP";
 import axios from "axios";
+import template_text from "./utils/template_text";
+import berbukaKeywords from "./utils/berbukaKeywords";
+import sahurKeywords from "./utils/sahurKeywords";
 
 function App() {
   const [answare, setAnsware] = useState("");
@@ -32,7 +34,6 @@ function App() {
             `http://ip-api.com/json/${response.data.ip}`
           );
           const countryAddress = getLocation.data.country;
-          console.log(countryAddress);
           setCountry(countryAddress);
         } catch (error) {
           console.error("Failed to fetch IP Location:", error); // Log any errors
@@ -50,81 +51,6 @@ function App() {
       const time_minutes = moment().format("mm");
       const time_now = `${time_hours}:${time_minutes}`;
       let checkBerbukaOrSahur;
-      const berbukaKeywords = [
-        "berbuka",
-        "buka",
-        "iftar",
-        "break",
-        "breaking",
-        "إفطار",
-        "فطور", // Arabic
-        "iftar",
-        "açma", // Turkish
-        "افطار",
-        "کھانے کا وقت", // Urdu
-        "iftar",
-        "repas de rupture du jeûne", // French
-        "iftar",
-        "romper el ayuno", // Spanish
-        "ифтар",
-        "разрыв поста", // Russian
-        "iftar",
-        "Fastenbrechen", // German
-        "இஃப்தார்",
-        "மாலை உணவு", // Tamil
-        "ইফতার",
-        "বিরতি", // Bengali
-        "อิฟตาร์",
-        "เลิกถือศีล", // Thai
-        "iftar",
-        "pagbabasag ng pag-aayuno", // Filipino
-        "iftar",
-        "kuvunja saumu", // Swahili
-        "イフタール",
-        "断食を破る", // Japanese
-        "이프타르",
-        "단식을 깨다", // Korean
-        "iftar",
-        "bữa ăn ngắt", // Vietnamese
-      ];
-
-      const sahurKeywords = [
-        "sahur",
-        "imsak",
-        "imsyak",
-        "suhoor",
-        "pre-dawn meal",
-        "سحور",
-        "سحور قبل الفجر", // Arabic
-        "sahur",
-        "sahur yemeği", // Turkish
-        "سحری",
-        "پہلی صبح کا کھانا", // Urdu
-        "suhur",
-        "repas avant l'aube", // French
-        "suhoor",
-        "comida antes del amanecer", // Spanish
-        "сахур",
-        "перед рассветом", // Russian
-        "suhur",
-        "Frühstück vor der Morgendämmerung", // German
-        "சஹூர்",
-        "காலை உணவு", // Tamil
-        "সেহেরি",
-        "সেহরি", // Bengali
-        "ซูโฮร์",
-        "มื้อก่อนรุ่งอรุณ", // Thai
-        "suhoor",
-        "pagkain bago ang umaga", // Filipino
-        "suhoor",
-        "chakula cha asubuhi", // Swahili
-        "スホール",
-        "夜明け前の食事", // Japanese
-        "수후르",
-        "새벽식사", // Korean
-        "suhur",
-        "bữa ăn trước khi mặt trời mọด", // Vietnamese
-      ];
 
       const isBerbukaMentioned = berbukaKeywords.some((keyword) =>
         textChat.toLowerCase().includes(keyword)
@@ -147,7 +73,7 @@ function App() {
         3. Berikan manajemen estimasi waktunya pengerjaan dari jam ${time_now} sampai selesai.
         4. Jika pertanyaanya tidak berunsur resep makanan/minumman maka cukup dengan memberikan response "Maaf, Kami Hanya Bisa Bantu Untuk Resep Makanan, Silahkan Coba Lagi 😄" tidak lebih.
         5. Tapi jika pertanyaanya berunsur resep makanan/minuman maka jawab dengan per point, pada langkah-langkah mengolah resepnya atur manajemen waktu, tambahkan juga emoji menarik di tiap bahannya dan berikan juga nutrisi dan gizi yang lengkap sehingga menjadi makanan/minuman yang sehat.
-        6. Jawab perintah semuanya dengan menggunakan bahasa dari negara ${country}`;
+        6. Jawab perintah 1,2,3,4,5 di atas dengan bahasa yang dipakai pertanyaan pada nomor 1`;
       const askAI = await requestGroqAI(prompt);
       setAskChat(textChat);
       console.log(prompt);
@@ -244,10 +170,33 @@ function App() {
             </div>
             <div className="h-full bg-slate-500 rounded-b-3xl px-6 pt-4 pb-2 flex flex-col justify-between overflow-auto">
               <div>
-                <BubbleChat reply={true}>Hai!</BubbleChat>
-                <BubbleChat>
-                  Hai, masukkan kata kunci "makanan/minuman"
-                </BubbleChat>
+                {country
+                  ? (() => {
+                      const matchedCountry = template_text.find(
+                        (data) => data.country === country
+                      );
+                      if (matchedCountry) {
+                        return (
+                          <>
+                            <BubbleChat reply={true}>
+                              {matchedCountry.send}
+                            </BubbleChat>
+                            <BubbleChat>{matchedCountry.reply}</BubbleChat>
+                          </>
+                        );
+                      } else {
+                        return (
+                          <>
+                            <BubbleChat reply={true}>Hi!</BubbleChat>
+                            <BubbleChat>
+                              Hi, enter the keyword "food/drink"
+                            </BubbleChat>
+                          </>
+                        );
+                      }
+                    })()
+                  : null}
+
                 {askChat ? (
                   <BubbleChat reply={true}>{askChat}</BubbleChat>
                 ) : null}
