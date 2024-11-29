@@ -31,9 +31,9 @@ function App() {
         try {
           // Make a GET request to get the user's Location Country
           const getLocation = await axios.get(
-            `http://ip-api.com/json/${response.data.ip}`
+            `https://api.iplocation.net/?ip=${response.data.ip}`
           );
-          const countryAddress = getLocation.data.country;
+          const countryAddress = getLocation.data.country_name;
           setCountry(countryAddress);
         } catch (error) {
           console.error("Failed to fetch IP Location:", error); // Log any errors
