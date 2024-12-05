@@ -60,10 +60,10 @@ function App() {
       );
       if (isBerbukaMentioned) {
         // avarage time adzan magrhib is range 17:30 AM to 19:00 AM, this is for breaking the fast
-        checkBerbukaOrSahur = `Untuk Berbuka Puasa dari jam ${time_now}sebelum jam 16:45`;
+        checkBerbukaOrSahur = `Untuk Berbuka Puasa dari jam ${time_now} sebelum jam 16:45`;
       } else if (isSahurMentioned) {
         // avarage time imsyak is range 4 AM to 5 AM, this is for sahur
-        checkBerbukaOrSahur = `Untuk Sahur dari jam ${time_now}sebelum jam 16:45`;
+        checkBerbukaOrSahur = `Untuk Sahur dari jam ${time_now} sebelum jam 04:00 pagi`;
       } else {
         checkBerbukaOrSahur = ""; // no need to fill in
       }
@@ -72,7 +72,7 @@ function App() {
         2. ${checkBerbukaOrSahur}
         3. Berikan manajemen estimasi waktunya pengerjaan dari jam ${time_now} sampai selesai.
         4. Jika pertanyaanya tidak berunsur resep makanan/minumman maka cukup dengan memberikan response "Maaf, Kami Hanya Bisa Bantu Untuk Resep Makanan, Silahkan Coba Lagi 😄" tidak lebih.
-        5. Tapi jika pertanyaanya berunsur resep makanan/minuman maka jawab dengan per point, pada langkah-langkah mengolah resepnya atur manajemen waktu, tambahkan juga emoji menarik di tiap bahannya dan berikan juga nutrisi dan gizi yang lengkap sehingga menjadi makanan/minuman yang sehat.
+        5. Tapi jika pertanyaanya berunsur resep makanan/minuman maka jawab dengan per point, pada langkah-langkah mengolah resepnya atur manajemen waktu, tambahkan juga emoji menarik di tiap bahannya dan berikan juga nutrisi dan gizi yang lengkap sehingga menjadi makanan/minuman yang sehat sesuai menurut ahli gizi.
         6. Jawab perintah 1,2,3,4,5 di atas dengan bahasa yang dipakai pertanyaan pada nomor 1`;
       const askAI = await requestGroqAI(prompt);
       setAskChat(textChat);
