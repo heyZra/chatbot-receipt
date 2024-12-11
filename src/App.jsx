@@ -134,7 +134,7 @@ function App() {
           <h1 className="animate-slidein max-[760px]:text-6xl [--slidein-delay:300ms] opacity-0 font-sans text-8xl">
             AI is here for{" "}
             <ReactTyped
-              strings={["You", "Receipt"]}
+              strings={["You", "Recipes"]}
               typeSpeed={getRandomSpeed(50, 250)}
               backSpeed={(100, 300)}
               loop
